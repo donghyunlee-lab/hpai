@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ko" data-theme="navy">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noarchive, noai, noimageai">
+  <meta name="tdm-reservation" content="1">
+  <title data-t="">반경 분석 · 조류인플루엔자 대시보드</title>
+  <meta name="description" content="HPAI 발생 지점 주변 500m·3km·10km 안의 다른 발생을 공개 자료로 확인" data-t-content="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="assets/style.css?v=202610110038">
+  <script>try{var hpL=new URLSearchParams(location.search).get("lang")||localStorage.getItem("hpLang");if(hpL==="en"){document.documentElement.classList.add("i18n-wait");setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},3000)}}catch(e){}</script>
+  <script>
+    /* 조회 집계(GA4)는 공개 주소 hpai.kr에서만 보낸다 */
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    if (location.hostname === "hpai.kr") {
+      gtag('js', new Date());
+      gtag('config', 'G-8BS2GGN1SZ');
+      document.head.appendChild(Object.assign(document.createElement("script"), { async: true, src: "https://www.googletagmanager.com/gtag/js?id=G-8BS2GGN1SZ" }));
+    }
+  </script>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="group">Donghyun Lee AI Group</span><a href="index.html" data-t="">조류인플루엔자 대시보드</a></div>
+  <nav aria-label="쪽 이동" data-t-aria-label="">
+    <a href="index.html" data-t="">국내 현황</a>
+    <a href="world.html" data-t="">세계 발생</a>
+    <a href="radius.html" aria-current="page" data-t="">반경 분석</a>
+    <a href="about.html" data-t="">자료와 한계</a>
+  </nav>
+  <div class="updated"><span data-t="hdr.updated">갱신</span> <b data-fill="generated"></b></div>
+  <div class="lang-switch" role="group" aria-label="언어" data-t-aria-label=""><a href="?lang=ko" data-lang="ko" lang="ko">한국어</a><a href="?lang=en" data-lang="en" lang="en">English</a></div>
+</header>
+
+<main class="wrap">
+  <section class="filters" aria-label="필터" data-t-aria-label="">
+    <label><span data-t="">시즌</span> <select id="f-season"></select></label>
+    <label><span data-t="">기준 지점</span>
+      <span class="seg" id="f-kind" role="group" aria-label="기준 지점" data-t-aria-label="">
+        <button type="button" data-v="wild" aria-pressed="true" data-t="">야생조류 HPAI</button>
+        <button type="button" data-v="farm" aria-pressed="false" data-t="">가금 농장 HPAI</button>
+      </span>
+    </label>
+    <span class="hint" data-t="">500m·3km·10km는 방역대(관리·보호·예찰지역) 반경입니다.</span>
+  </section>
+
+  <section class="radius-layout">
+    <article class="card">
+      <h2><span data-t="">기준 지점</span> <span class="badge" id="pick-badge"></span></h2>
+      <p class="sub" data-t="">하나를 고르면 그 주변의 다른 발생을 보여 줍니다.</p>
+      <div class="pick-list" id="pick-list" role="listbox" aria-label="기준 지점 목록" data-t-aria-label=""></div>
+    </article>
+    <div>
+      <article class="card">
+        <h2 id="focus-title" data-t="">반경 지도</h2>
+        <div class="layers">
+          <span class="legend" style="margin:0">
+            <span><span class="key wild"></span><span data-t="">야생조류 HPAI</span></span>
+            <span><span class="key farm"></span><span data-t="">가금 농장 HPAI</span></span>
+            <span><span class="key lpai"></span><span data-t="">야생조류 LPAI(H5·H7)</span></span>
+            <span><span class="key ring"></span><span data-t="">500m·3km·10km</span></span>
+          </span>
+        </div>
+        <div id="map" class="map tall" role="region" aria-label="반경 지도" data-t-aria-label=""></div>
+        <p class="note" data-t="">가금 농장 위치는 농식품부가 공개한 읍면동 관공서 좌표라 실제 농장과 수 km 다를 수 있습니다. 가금 농장까지의 거리, 특히 500m 안 여부는 참고로만 보세요.</p>
+      </article>
+      <article class="card" id="card-facts">
+        <h2><span data-t="">한눈에 보기</span> <span class="badge" id="facts-badge"></span></h2>
+        <div class="facts" id="facts"></div>
+        <div id="rings"></div>
+      </article>
+      <article class="card" id="card-near">
+        <h2><span data-t="">10km 안의 다른 발생</span> <span class="badge" id="near-badge"></span></h2>
+        <div class="scroll" id="near-table"></div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div data-t="ftr.ops"><b>운영</b> 한국외국어대학교 이동현 교수 연구실(<a href="https://donghyunlee-lab.github.io">Donghyun Lee AI Group</a>) · <b>개발</b> 한국인공지능㈜</div>
+  <div data-t="rad.ftr.src"><b>출처</b> 국립야생동물질병관리원 야생동물 질병관리 시스템(WADIS, 조회 <span data-fill="wadisDate"></span>) · 농림축산식품부 가축질병 발생현황(KAHIS 정보공개 기준, 조회 <span data-fill="mafraDate"></span>) · 행정구역 경계 통계청 SGIS(공공누리 제1유형)·admdongkor(CC BY 4.0) · 배경지도 © OpenStreetMap 기여자 · 위성 Sentinel-2 cloudless(EOX)</div>
+  <div class="copy" data-t="ftr.copy">© 2026 Donghyun Lee AI Group · 한국인공지능㈜. 화면 코드의 무단 복제·재사용을 금합니다. 숫자와 그림은 출처를 밝혀 인용할 수 있고, 원자료의 권리는 각 출처에 있습니다.</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="data/domestic.js?v=202610110038"></script>
+<script src="assets/korea-admin.js?v=202610110038"></script>
+<script src="assets/i18n.js?v=202610110038"></script>
+<script src="assets/common.js?v=202610110038"></script>
+<script src="assets/charts.js?v=202610110038"></script>
+<script src="assets/radius.js?v=202610110038"></script>
+</body>
+</html>

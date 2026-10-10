@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko" data-theme="navy">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noarchive, noai, noimageai">
+  <meta name="tdm-reservation" content="1">
+  <title data-t="">세계 발생 · 조류인플루엔자 대시보드</title>
+  <meta name="description" content="WOAH WAHIS 자료로 보는 세계 고병원성 조류인플루엔자 발생 보고" data-t-content="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="assets/style.css?v=202610110038">
+  <script>try{var hpL=new URLSearchParams(location.search).get("lang")||localStorage.getItem("hpLang");if(hpL==="en"){document.documentElement.classList.add("i18n-wait");setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},3000)}}catch(e){}</script>
+  <script>
+    /* 조회 집계(GA4)는 공개 주소 hpai.kr에서만 보낸다 */
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    if (location.hostname === "hpai.kr") {
+      gtag('js', new Date());
+      gtag('config', 'G-8BS2GGN1SZ');
+      document.head.appendChild(Object.assign(document.createElement("script"), { async: true, src: "https://www.googletagmanager.com/gtag/js?id=G-8BS2GGN1SZ" }));
+    }
+  </script>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="group">Donghyun Lee AI Group</span><a href="index.html" data-t="">조류인플루엔자 대시보드</a></div>
+  <nav aria-label="쪽 이동" data-t-aria-label="">
+    <a href="index.html" data-t="">국내 현황</a>
+    <a href="world.html" aria-current="page" data-t="">세계 발생</a>
+    <a href="radius.html" data-t="">반경 분석</a>
+    <a href="about.html" data-t="">자료와 한계</a>
+  </nav>
+  <div class="updated"><span data-t="hdr.wahis">WAHIS 추출</span> <b data-fill="extraction"></b></div>
+  <div class="lang-switch" role="group" aria-label="언어" data-t-aria-label=""><a href="?lang=ko" data-lang="ko" lang="ko">한국어</a><a href="?lang=en" data-lang="en" lang="en">English</a></div>
+</header>
+
+<main class="wrap">
+  <div class="notice" id="notice" role="status" hidden></div>
+  <section class="filters" aria-label="필터" data-t-aria-label="">
+    <label><span data-t="">기간</span> <select id="f-period"></select></label>
+    <label><span data-t="">구분</span>
+      <span class="seg" id="f-kind" role="group" aria-label="구분" data-t-aria-label="">
+        <button type="button" data-v="" aria-pressed="true" data-t="">전체</button>
+        <button type="button" data-v="1" aria-pressed="false" data-t="">야생조류</button>
+        <button type="button" data-v="0" aria-pressed="false" data-t="">가금</button>
+      </span>
+    </label>
+    <label><span data-t="">대륙</span> <select id="f-region"></select></label>
+    <label><span data-t="">조류 종</span> <select id="f-species"></select></label>
+    <span class="hint" data-t="wld.hint">기간은 WAHIS 추출일(<span data-fill="extractionMd"></span>)부터 거꾸로 셉니다. 조류 종을 고르면 야생 보고만 셉니다.</span>
+  </section>
+
+  <section class="kpis kpis-4" id="kpis" aria-label="주요 숫자" data-t-aria-label=""></section>
+
+  <section class="grid g-map">
+    <article class="card">
+      <h2><span data-t="">발생 지점</span> <span class="badge" id="map-badge"></span></h2>
+      <div class="layers">
+        <span class="legend" id="map-legend" style="margin:0"><span><span class="key wild"></span><span data-t="">야생조류</span></span><span><span class="key farm"></span><span data-t="">가금</span></span></span>
+        <div class="lg"><label><input type="checkbox" id="lay-freeze"><span class="key frz"></span><span data-t="">영하선(동아시아, 주별)</span></label></div>
+      </div>
+      <div id="map" class="map" role="region" aria-label="세계 발생 지도" data-t-aria-label=""></div>
+      <p class="note" id="map-note" data-t="">점 1개가 발생 보고 1건입니다. 커서를 올리면 국가·아형·종·발생일·보고일이 나옵니다.</p>
+      <p class="note" id="frz-note" hidden data-t="wld.frz.note">영하선은 그 주 밤 최저기온 평균이 0°C인 곳을 이은 선입니다. 선 북쪽은 대개 밤마다 얼 만큼 춥습니다. 진한 선이 지난 7일이고 옅을수록 더 지난 주이며, 점선은 앞으로 7일 예보입니다. 속 빈 점은 국내 첫 검출 시기 전망에 쓰는 출발지 12곳입니다. 2.5° 격자로 계산해 큰 흐름만 보여 주고, 해발 2,000 m가 넘는 곳은 뺐습니다. 기온과 발생이 함께 움직여 보여도 기온이 원인이라는 뜻은 아닙니다.</p>
+      <p class="note" id="frz-err" role="alert" hidden></p>
+    </article>
+    <article class="card" id="card-country">
+      <h2><span data-t="">국가별 발생</span> <span class="badge" data-t="">상위 12</span></h2>
+      <p class="sub" data-t="">고른 기간의 발생 보고 수</p>
+      <div id="leg-country"></div>
+      <div class="chart" id="country"></div>
+    </article>
+  </section>
+
+  <section class="card" id="card-wtl">
+    <h2><span data-t="">전체 흐름: 주별 발생 보고</span> <span class="badge" id="wtl-badge"></span></h2>
+    <p class="sub" id="wtl-sub"></p>
+    <div class="chart" id="wtimeline"></div>
+    <p class="note" id="wtl-note"></p>
+  </section>
+
+  <section class="card" id="card-species">
+    <h2><span data-t="">어떤 새에서 나왔나</span> <span class="badge" id="species-badge"></span></h2>
+    <p class="sub" data-t="">고른 기간·대륙의 야생 발생 보고를 종 무리로 묶었습니다(포유류 보고도 함께 셉니다). 무리나 종을 누르면 지도와 숫자에 그것만 남고, 다시 누르면 전체로 돌아갑니다.</p>
+    <div id="species-panel"></div>
+    <p class="note" id="species-note"></p>
+  </section>
+
+  <section class="grid g-2">
+    <article class="card" id="card-trend">
+      <h2><span data-t="">발생 추이</span> <span class="badge" id="trend-badge"></span></h2>
+      <p class="sub" data-t="">발생 시작일 기준</p>
+      <div id="leg-trend"></div>
+      <div class="chart" id="trend"></div>
+    </article>
+    <article class="card" id="card-sero">
+      <h2><span data-t="">바이러스 아형</span></h2>
+      <p class="sub" data-t="">7월~6월 시즌별. 구분·대륙 필터만 걸립니다.</p>
+      <div id="leg-sero"></div>
+      <div class="chart" id="sero"></div>
+    </article>
+  </section>
+
+  <section class="card">
+    <h2><span data-t="">한국 주변 나라</span> <span class="badge" data-t="">발생 보고 수</span></h2>
+    <p class="sub" data-t="">구분·조류 종 필터가 걸립니다. 이번 시즌은 7월 1일부터 WAHIS 추출일까지입니다.</p>
+    <div id="near"></div>
+  </section>
+
+  <section class="card" id="card-move">
+    <h2><span data-t="">한국에서 겨울을 난 철새가 간 곳</span> <span class="badge" id="move-badge"></span></h2>
+    <p class="sub" data-t="">농림축산검역본부에서 위치추적기를 단 철새가 봄에 북상해 머문 곳입니다. 원자료에 지명만 있어 선은 시군·성 단위의 대략적인 위치를 잇습니다.</p>
+    <div class="controls" id="move-controls">
+      <label><span data-t="">종</span> <select id="move-species"></select></label>
+      <label><span data-t="">해</span> <select id="move-year"></select></label>
+    </div>
+    <div class="grid g-map" style="margin:0">
+      <div>
+        <div class="layers"><span class="legend" style="margin:0">
+          <span><span class="key wild"></span><span data-t="">간 곳(원이 클수록 많음)</span></span>
+          <span><span class="key dark"></span><span data-t="">북상 전 국내 위치</span></span>
+          <span><i class="ln key-line"></i><span data-t="">북상 경로(굵을수록 많음)</span></span>
+        </span></div>
+        <div id="move-map" class="map" role="region" aria-label="철새 북상 경로 지도" data-t-aria-label=""></div>
+      </div>
+      <div>
+        <h3 class="h3" data-t="">간 나라</h3>
+        <div id="move-country"></div>
+        <h3 class="h3" data-t="">많이 간 곳</h3>
+        <div class="scroll" style="max-height:330px" id="move-top"></div>
+      </div>
+    </div>
+    <p class="note" id="move-note"></p>
+  </section>
+
+  <section class="card notes">
+    <h2 data-t="">읽는 법과 출처</h2>
+    <ul>
+      <li data-t="">각국 수의당국이 WOAH에 보고한 HPAI 발생(즉시통보·후속보고)을 셉니다. 30곳 이상을 묶은 보고도 1건입니다.</li>
+      <li data-t="">보고가 늦게 들어오는 일이 있어 최근 몇 주 숫자는 늘 수 있습니다. 나라마다 감시 방식과 보고 범위가 달라, 숫자가 많다고 위험이 큰 것은 아닙니다.</li>
+      <li data-t="">위치는 각국이 보고한 좌표이고, 일부는 대략적인 위치입니다.</li>
+    </ul>
+    <p class="caption" id="woah-caption"></p>
+  </section>
+</main>
+
+<footer class="foot">
+  <div data-t="ftr.ops"><b>운영</b> 한국외국어대학교 이동현 교수 연구실(<a href="https://donghyunlee-lab.github.io">Donghyun Lee AI Group</a>) · <b>개발</b> 한국인공지능㈜</div>
+  <div data-t="wld.ftr.src"><b>출처</b> WOAH WAHIS(추출 <span data-fill="extraction"></span>) · 철새 이동 농림축산검역본부(공공데이터포털)·지명 위치 OpenStreetMap Nominatim · 배경지도 © OpenStreetMap 기여자 · 위성 Sentinel-2 cloudless(EOX) · 기온 Open-Meteo(ERA5)</div>
+  <div class="copy" data-t="ftr.copy">© 2026 Donghyun Lee AI Group · 한국인공지능㈜. 화면 코드의 무단 복제·재사용을 금합니다. 숫자와 그림은 출처를 밝혀 인용할 수 있고, 원자료의 권리는 각 출처에 있습니다.</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="data/world.js?v=202610110038"></script>
+<script src="data/birds.js?v=202610110038"></script>
+<script src="data/notices.js?v=202610110038"></script>
+<script src="assets/i18n.js?v=202610110038"></script>
+<script src="assets/common.js?v=202610110038"></script>
+<script src="assets/charts.js?v=202610110038"></script>
+<script src="assets/world.js?v=202610110038"></script>
+</body>
+</html>

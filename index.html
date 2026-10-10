@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ko" data-theme="navy">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noarchive, noai, noimageai">
+  <meta name="tdm-reservation" content="1">
+  <title data-t="">조류인플루엔자 대시보드 · Donghyun Lee AI Group</title>
+  <meta name="description" content="국립야생동물질병관리원 WADIS, 농림축산식품부 가축질병 발생 정보, WOAH WAHIS 공개 자료로 보는 고병원성 조류인플루엔자 현황" data-t-content="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="assets/style.css?v=202610110038">
+  <script>try{var hpL=new URLSearchParams(location.search).get("lang")||localStorage.getItem("hpLang");if(hpL==="en"){document.documentElement.classList.add("i18n-wait");setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},3000)}}catch(e){}</script>
+  <script>
+    /* 조회 집계(GA4)는 공개 주소 hpai.kr에서만 보낸다 */
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    if (location.hostname === "hpai.kr") {
+      gtag('js', new Date());
+      gtag('config', 'G-8BS2GGN1SZ');
+      document.head.appendChild(Object.assign(document.createElement("script"), { async: true, src: "https://www.googletagmanager.com/gtag/js?id=G-8BS2GGN1SZ" }));
+    }
+  </script>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="group">Donghyun Lee AI Group</span><a href="index.html" data-t="">조류인플루엔자 대시보드</a></div>
+  <nav aria-label="쪽 이동" data-t-aria-label="">
+    <a href="index.html" aria-current="page" data-t="">국내 현황</a>
+    <a href="world.html" data-t="">세계 발생</a>
+    <a href="radius.html" data-t="">반경 분석</a>
+    <a href="about.html" data-t="">자료와 한계</a>
+  </nav>
+  <div class="updated"><span data-t="hdr.updated">갱신</span> <b data-fill="generated"></b></div>
+  <div class="lang-switch" role="group" aria-label="언어" data-t-aria-label=""><a href="?lang=ko" data-lang="ko" lang="ko">한국어</a><a href="?lang=en" data-lang="en" lang="en">English</a></div>
+</header>
+
+<main class="wrap">
+  <div class="notice" id="notice" role="status" hidden></div>
+  <section class="filters" aria-label="필터" data-t-aria-label="">
+    <label><span data-t="">시즌</span> <select id="f-season"></select></label>
+    <label><span data-t="">시도</span> <select id="f-sido"></select></label>
+    <label><span data-t="">야생조류 시료</span> <select id="f-sample"></select></label>
+    <label><span data-t="">조류 종</span> <select id="f-species"></select></label>
+    <span class="hint" data-t="">필터는 숫자·지도·차트에 함께 걸립니다. 시료와 조류 종은 야생조류에만 걸리고, 예측과 전망은 늘 이번 시즌 전국 기준입니다.</span>
+  </section>
+
+  <p class="note lag-note" id="lag-note"></p>
+  <section class="kpis" id="kpis" aria-label="주요 숫자" data-t-aria-label=""></section>
+
+  <section class="grid g-map">
+    <article class="card">
+      <h2><span data-t="">발생 지도</span> <span class="badge" id="map-badge"></span></h2>
+      <div class="layers" id="layers">
+        <div class="lg"><span class="lg-h" data-t="">고른 시즌</span>
+        <label><input type="checkbox" data-layer="wild" checked><span class="key wild"></span><span data-t="">야생조류 HPAI</span></label>
+        <label><input type="checkbox" data-layer="farm" checked><span class="key farm"></span><span data-t="">가금 농장 HPAI</span></label>
+        <label><input type="checkbox" data-layer="lpai"><span class="key lpai"></span><span data-t="">야생조류 LPAI(H5·H7)</span></label>
+        <label><input type="checkbox" data-layer="neg"><span class="key neg"></span><span data-t="">음성·기타 검사 지점</span></label>
+        </div>
+        <div class="lg"><span class="lg-h" data-t="">참고</span>
+        <label><input type="checkbox" data-layer="past"><span class="key past"></span><span data-t="">지난 시즌 HPAI</span></label>
+        <label><input type="checkbox" data-layer="recur" checked><span class="key ring"></span><span data-t="">상습 검출지</span></label>
+        <label><input type="checkbox" data-layer="grade" checked><span class="key grade"></span><span data-t="">이번 시즌 검출 가능성(시군)</span></label>
+        <label><input type="checkbox" data-layer="cold"><span class="key cold"></span><span data-t="">밤 영하 지역(지난 7일)</span></label>
+        <label><input type="checkbox" data-layer="site"><span class="key site"></span><span data-t="">철새 도래지(겨울철새 수)</span></label>
+        <label><input type="checkbox" data-layer="lc-water"><span class="key lc-water"></span><span data-t="">물·습지</span></label>
+        <label><input type="checkbox" data-layer="lc-crop"><span class="key lc-crop"></span><span data-t="">농경지</span></label>
+        </div>
+      </div>
+      <div id="map" class="map" role="region" aria-label="발생 지도" data-t-aria-label=""></div>
+      <div class="tbar" id="tbar" hidden>
+        <button type="button" class="tbtn tb-play" id="tb-play" aria-label="재생" data-t-aria-label="">▶</button>
+        <div class="tb-track">
+          <svg id="tb-hist" class="tb-hist" preserveAspectRatio="none" aria-hidden="true"></svg>
+          <input type="range" id="tb-range" min="0" max="0" step="1" value="0" aria-label="주 고르기" data-t-aria-label="">
+        </div>
+        <span class="tb-label" id="tb-label" aria-live="polite"></span>
+      </div>
+      <p class="note" id="tb-note" data-t="idx.tbar.note">막대를 끌거나 ▶를 누르면 주마다 점이 쌓입니다. 진한 테두리는 그 주에 새로 나온 곳입니다. 점이 나타나는 순서는 채취일(가금 농장은 발생일) 순서일 뿐 전파 경로가 아닙니다. 크게 보기에서 GIF로 저장할 수 있습니다.</p>
+      <p class="note" id="site-note" aria-live="polite"></p>
+      <p class="note" id="lc-note" hidden></p>
+      <p class="note" id="cold-note" aria-live="polite" hidden></p>
+      <p class="note" data-t="idx.map.note">가금 농장 점은 농식품부가 공개한 읍면동 관공서 위치라 실제 농장과 다릅니다. 상습 검출지는 <span data-fill="recurBase"></span> 다섯 시즌 가운데 세 시즌 이상 야생조류 HPAI가 나온 시군구이고, 점선 원은 올해 검사 기록이 예년 같은 기간의 절반에 못 미치는 곳입니다. 바탕은 오른쪽 위에서 행정구역·지도·위성으로 바꿉니다. 왼쪽 위에서는 확대 비율을 숫자로 넣거나(100%는 전국이 꼭 맞는 크기) 크게 보기를 눌러 PNG로 저장합니다. '이번 시즌 검출 가능성'은 처음부터 켜 두었습니다. 자체 예측 모형으로 본 가능성에 따라 시군을 높음(진한 보라)·보통(옅은 보라)으로 칠합니다. 정부가 정한 방역 지역과는 다릅니다(아래 '이번 시즌 전망' 참고). '철새 도래지'를 켜면 국립생물자원관이 겨울철새를 세는 도래지를 갈색 원으로 그리고, 원 넓이는 고른 시즌에 가장 많았던 달의 마릿수에 비례합니다.</p>
+    </article>
+    <article class="card detail" id="detail">
+      <h2><span id="detail-title">이번 시즌 검출</span> <span class="badge" id="detail-badge"></span></h2>
+      <div id="detail-body"></div>
+    </article>
+  </section>
+
+  <section class="card" id="card-temp">
+    <h2><span data-t="">시군 밤 최저기온</span> <span class="badge" id="temp-badge"></span></h2>
+    <p class="sub" data-t="idx.temp.sub">이번 시즌(8월부터)과 지난 시즌의 밤 최저기온을 같은 날짜에 겹쳤습니다. 회색 띠와 회색 점선은 평년(1991–2020)입니다. 아래 점은 그 시군의 HPAI 검출 날짜입니다. 지도에서 '밤 영하 지역'을 켜고 시군을 눌러도 바뀝니다.</p>
+    <div class="controls" id="temp-controls">
+      <label><span data-t="">시도</span> <select id="temp-sido"></select></label>
+      <label><span data-t="">시군</span> <select id="temp-sgg"></select></label>
+    </div>
+    <div id="leg-temp"></div>
+    <div class="chart" id="temp-chart"></div>
+    <p class="note" id="temp-note" aria-live="polite"></p>
+    <p class="note" data-t="idx.temp.src">기온은 Open-Meteo 일 최저기온입니다(ERA5 재분석, 최근 며칠과 앞으로 7일은 예보 모형). 시군 안의 한 점(대표점) 값이라 넓은 시군은 곳에 따라 다를 수 있습니다. 평년은 코페르니쿠스 ERA5-Land 1991–2020년 30시즌에서 같은 날 앞뒤 7일을 모아 냈습니다. 점선은 평균, 띠는 10–90% 범위입니다. 두 자료는 시군마다 조금씩 달라서 지난 시즌의 날마다 차이를 계절에 따라 매끄럽게 맞춰 평년에 더했습니다(DOI 10.24381/ee82e357, CC BY 4.0, Contains modified Copernicus Climate Change Service information 2026). 평년과 1°C 안쪽으로 다르면 '평년과 비슷'으로 씁니다.</p>
+  </section>
+
+  <section class="card" id="card-timeline">
+    <h2><span data-t="">전체 흐름: 주별 검출과 검사</span> <span class="badge" id="tl-badge"></span></h2>
+    <p class="sub" id="tl-sub"></p>
+    <div class="chart" id="timeline"></div>
+    <p class="note" id="tl-note"></p>
+  </section>
+
+  <section class="card" id="card-notices">
+    <h2><span data-t="">공식 알림</span> <span class="badge" id="notices-badge"></span></h2>
+    <p class="sub" data-t="">정부 기관의 보도자료와 동향보고 가운데 조류인플루엔자 관련 글의 제목만 모았습니다. 제목을 누르면 원문이 새 창에서 열립니다. 매일 확인합니다.</p>
+    <ul class="notice-list" id="notice-list"></ul>
+  </section>
+
+  <section class="card" id="card-species">
+    <h2><span data-t="">어떤 새에서 나왔나</span> <span class="badge" id="species-badge"></span></h2>
+    <p class="sub" data-t="">야생조류 HPAI가 나온 새를 무리로 묶었습니다. 무리나 종을 누르면 지도·숫자·차트의 야생조류에 그 새만 남고, 다시 누르면 전체로 돌아갑니다.</p>
+    <div id="species-panel"></div>
+    <p class="note" id="species-note"></p>
+  </section>
+
+  <section class="card" id="card-scen">
+    <h2><span data-t="">예측: 야생조류 HPAI(전국)</span> <span class="badge" id="scen-badge"></span></h2>
+    <p class="sub" id="scen-sub"></p>
+    <div class="controls">
+      <span class="seg" id="scen-model" role="group" aria-label="모형" data-t-aria-label="">
+        <button type="button" data-v="main" aria-pressed="true" data-t="">기본 예측</button>
+        <button type="button" data-v="early" aria-pressed="false" data-t="">이른 추위라면</button>
+        <button type="button" data-v="late" aria-pressed="false" data-t="">늦은 추위라면</button>
+        <button type="button" data-v="scale" aria-pressed="false" data-t="">낮음·보통·높음</button>
+      </span>
+      <span class="seg" id="scen-view" role="group" aria-label="보기" data-t-aria-label="">
+        <button type="button" data-v="cum" aria-pressed="true" data-t="">누적</button>
+        <button type="button" data-v="daily" aria-pressed="false" data-t="">일별</button>
+        <button type="button" data-v="monthly" aria-pressed="false" data-t="">월별</button>
+      </span>
+    </div>
+    <p class="lead-text" id="scen-text"></p>
+    <div id="leg-scen"></div>
+    <div class="chart" id="scen"></div>
+    <p class="note" id="scen-note"></p>
+    <div class="grid g-2" style="margin:10px 0 0">
+      <div><h3 class="h3" data-t="">모형별 시즌 합계</h3><div id="scen-table"></div></div>
+      <div><h3 class="h3" data-t="">지난 시즌에 얼마나 맞았나</h3><div id="scen-acc"></div></div>
+    </div>
+  </section>
+
+  <section class="grid g-2">
+    <article class="card" id="card-rate">
+      <h2><span data-t="">검사 대비 검출률</span> <span class="badge" id="rate-badge"></span></h2>
+      <p class="sub" id="rate-sub"></p>
+      <div id="leg-rate"></div>
+      <div class="chart" id="rate"></div>
+      <h3 class="h3"><span data-t="">시도별</span> <span class="badge" id="rate-sido-badge"></span></h3>
+      <div class="scroll" style="max-height:240px" id="rate-sido"></div>
+    </article>
+    <article class="card" id="card-gap">
+      <h2><span data-t="">상습 검출지 검사 현황</span> <span class="badge" id="gap-badge"></span></h2>
+      <p class="sub" id="gap-sub"></p>
+      <div class="scroll" style="max-height:440px" id="gap-table"></div>
+      <p class="note" data-t="">WADIS 공개 기록 기준입니다. 농식품부·지자체 검사는 대부분 빠져 있어, 기록이 적다고 검사를 안 했다는 뜻은 아닙니다.</p>
+    </article>
+  </section>
+
+  <section class="grid g-2">
+    <article class="card" id="card-cum-wild">
+      <h2><span data-t="">시즌 누적: 야생조류 HPAI</span></h2>
+      <p class="sub" id="cum-wild-sub">7월 1일부터 쌓은 검출 건수(채취일 기준). 회색 띠는 다른 시즌들의 범위입니다.</p>
+      <div id="leg-cum-wild"></div>
+      <div class="chart" id="cum-wild"></div>
+    </article>
+    <article class="card" id="card-cum-farm">
+      <h2><span data-t="">시즌 누적: 가금 농장 HPAI</span></h2>
+      <p class="sub" id="cum-farm-sub">7월 1일부터 쌓은 발생 건수(발생일 기준). 공개 목록이 2023년 1월부터라 23–24 시즌부터 그립니다.</p>
+      <div id="leg-cum-farm"></div>
+      <div class="chart" id="cum-farm"></div>
+    </article>
+  </section>
+
+  <section class="card" id="card-birds">
+    <h2><span data-t="">겨울철새 수와 야생조류 HPAI</span> <span class="badge" id="birds-badge"></span></h2>
+    <p class="sub" data-t="">국립생물자원관이 10월부터 3월까지 달마다 전국 주요 철새 도래지에서 센 겨울철새 수(보도자료의 전국 합계)와, 같은 달 전국 야생조류 HPAI 검출 건수(채취일 기준)입니다.</p>
+    <div id="leg-birds"></div>
+    <div class="grid g-2" style="margin:0" id="birds-charts">
+      <div><h3 class="h3" data-t="">겨울철새 수(만 마리)</h3><div class="chart" id="birds-count"></div></div>
+      <div><h3 class="h3" data-t="">야생조류 HPAI 검출(건)</h3><div class="chart" id="birds-hpai"></div></div>
+    </div>
+    <p class="note" id="birds-note"></p>
+  </section>
+
+  <section class="card" id="forecast">
+    <h2><span data-t="">이번 시즌 전망</span> <span class="badge" data-t="">공개 자료로 만든 예측</span></h2>
+    <p class="sub" data-t="">첫 검출 시기와 다시 나올 가능성이 큰 시군입니다. 같은 방법이 지난 시즌에 얼마나 맞았는지도 함께 보여 줍니다.</p>
+    <div class="grid g-2" style="margin:0">
+      <div>
+        <h3 class="h3" data-t="">첫 검출 시기: 출발지 기온 기준</h3>
+        <p class="lead-text" id="first-summary"></p>
+        <div id="lead"></div>
+        <h3 class="h3"><span data-t="">출발지 12곳의 첫 영하일</span> <span class="badge" id="sites-badge"></span></h3>
+        <div class="scroll" style="max-height:220px" id="sites"></div>
+        <p class="note"><a href="world.html?layer=freeze" data-t="">세계 발생 지도에서 영하선 보기 →</a></p>
+      </div>
+      <div>
+        <h3 class="h3" data-t="">HPAI가 다시 나올 가능성이 큰 시군</h3>
+        <p class="note" id="recur-rule"></p>
+        <div id="recur-list"></div>
+        <h3 class="h3" data-t="">이 규칙을 지난 시즌에 썼다면</h3>
+        <div id="backtest"></div>
+        <h3 class="h3"><span data-t="">자체 예측 모형: 시군별 검출 가능성</span> <span class="badge" id="grade-badge"></span></h3>
+        <p class="note" id="grade-rule"></p>
+        <div id="grade-list"></div>
+        <h3 class="h3" data-t="">이 모형을 지난 시즌에 썼다면</h3>
+        <div id="grade-backtest"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid g-2">
+    <article class="card" id="card-ratio">
+      <h2><span data-t="">LPAI/HPAI 비율</span></h2>
+      <p class="sub" data-t="">야생조류에서 나온 저병원성(H5·H7) 건수를 고병원성 건수로 나눈 값(시즌별)</p>
+      <div id="leg-ratio"></div>
+      <div class="chart" id="ratio"></div>
+    </article>
+    <article class="card notes">
+      <h2 data-t="">읽을 때 주의할 점</h2>
+      <ul>
+        <li data-t="">공개 검사 기록은 채취 건 단위라 검사량을 알 수 없습니다. 검출이 없다고 바이러스가 없다는 뜻은 아닙니다.</li>
+        <li data-t="">야생조류는 채취일, 가금 농장은 발생일 기준입니다. 확진과 공개까지 며칠 걸려 최근 1~2주 숫자는 늘 수 있습니다.</li>
+        <li data-t="">자체 예측 모형은 다섯 시즌 기록으로 배워 구간이 넓습니다. 가운데 값만 보지 말고 50%·95% 구간을 함께 보세요.</li>
+        <li data-t="">첫 검출 시기와 상습 검출지는 지난 시즌 기록으로 만든 단순 규칙입니다. 검사를 많이 하는 곳일수록 다시 검출되기 쉬워, 적중 기록에도 그 차이가 섞여 있습니다.</li>
+      </ul>
+      <p class="caption" data-t="idx.notes.caption">출처와 계산 방법은 <a href="about.html">자료와 한계</a>에 있습니다.</p>
+    </article>
+  </section>
+</main>
+
+<footer class="foot">
+  <div data-t="ftr.ops"><b>운영</b> 한국외국어대학교 이동현 교수 연구실(<a href="https://donghyunlee-lab.github.io">Donghyun Lee AI Group</a>) · <b>개발</b> 한국인공지능㈜</div>
+  <div data-t="idx.ftr.src"><b>출처</b> 국립야생동물질병관리원 야생동물 질병관리 시스템(WADIS, 조회 <span data-fill="wadisDate"></span>) · 농림축산식품부 가축질병 발생현황(KAHIS 정보공개 기준, 조회 <span data-fill="mafraDate"></span>) · 기온 Open-Meteo(ERA5·예보, CC BY 4.0) · 평년 기온 Copernicus ERA5-Land(CC BY 4.0) · 겨울철새 수 국립생물자원관 조사(기후에너지환경부 보도자료) · 철새 도래지 행정안전부 생활안전지도(국립생물자원관 겨울철 조류 조사) · 행정구역 경계 통계청 SGIS(공공누리 제1유형)·admdongkor(CC BY 4.0) · 배경지도 © OpenStreetMap 기여자 · 위성 Sentinel-2 cloudless(EOX)</div>
+  <div class="copy" data-t="ftr.copy">© 2026 Donghyun Lee AI Group · 한국인공지능㈜. 화면 코드의 무단 복제·재사용을 금합니다. 숫자와 그림은 출처를 밝혀 인용할 수 있고, 원자료의 권리는 각 출처에 있습니다.</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="data/domestic.js?v=202610110038"></script>
+<script src="data/birds.js?v=202610110038"></script>
+<script src="data/notices.js?v=202610110038"></script>
+<script src="assets/korea-admin.js?v=202610110038"></script>
+<script src="assets/i18n.js?v=202610110038"></script>
+<script src="assets/common.js?v=202610110038"></script>
+<script src="assets/charts.js?v=202610110038"></script>
+<script src="assets/domestic.js?v=202610110038"></script>
+</body>
+</html>
