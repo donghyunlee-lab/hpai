@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko" data-theme="navy">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noarchive, noai, noimageai">
+  <!-- 네이버 서치어드바이저 소유 확인(2026-10-20, 교수님 네이버 계정) -->
+  <meta name="naver-site-verification" content="f0421c084637c6bbd9b41970a5aee5906eb07467">
+  <meta name="tdm-reservation" content="1">
+  <title data-t="">자료와 한계 · 조류인플루엔자 대시보드</title>
+  <meta name="description" content="조류인플루엔자 대시보드의 자료 출처, 계산 방법, 한계" data-t-content="">
+  <!-- 검색·공유(2026-10-20): 주소 하나로 모으고, 카카오톡·네이버 등에 붙일 때 제목·설명·그림 카드가 뜨게 -->
+  <link rel="canonical" href="https://hpai.kr/about.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="조류인플루엔자 대시보드">
+  <meta property="og:title" content="자료와 한계 · 조류인플루엔자 대시보드">
+  <meta property="og:description" content="조류인플루엔자 대시보드의 자료 출처, 계산 방법, 한계">
+  <meta property="og:url" content="https://hpai.kr/about.html">
+  <meta property="og:image" content="https://hpai.kr/og.jpg?v=20261023">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="ko_KR">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" type="application/rss+xml" title="조류인플루엔자 대시보드 새 소식" href="https://hpai.kr/rss.xml">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="assets/style.css?v=202610241850">
+  <script>try{var hpL=new URLSearchParams(location.search).get("lang")||localStorage.getItem("hpLang");if(hpL==="en"){document.documentElement.classList.add("i18n-wait");setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},3000)}}catch(e){}</script>
+  <script>
+    /* 조회 집계(GA4)는 공개 주소 hpai.kr에서만 보낸다 */
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    if (location.hostname === "hpai.kr") {
+      gtag('js', new Date());
+      gtag('config', 'G-8BS2GGN1SZ');
+      document.head.appendChild(Object.assign(document.createElement("script"), { async: true, src: "https://www.googletagmanager.com/gtag/js?id=G-8BS2GGN1SZ" }));
+    }
+  </script>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="mark" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24"><path d="M16 7h.01"/><path d="M3.4 18H12a8 8 0 0 0 8-8V7a4 4 0 0 0-7.28-2.3L2 20"/><path d="m20 7 2 .5-2 .5"/><path d="M10 18v3"/><path d="M14 17.75V21"/><path d="M7 18a6 6 0 0 0 3.84-10.61"/></svg></span><a class="group" href="https://donghyunlee-lab.github.io">Donghyun Lee AI Group</a><a href="index.html" data-t="">조류인플루엔자 대시보드</a></div>
+  <nav aria-label="쪽 이동" data-t-aria-label="">
+    <a href="index.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></svg><span data-t="">국내 현황</span></a>
+    <a href="world.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg><span data-t="">세계 발생</span></a>
+  </nav>
+  <div class="hdr-links"><a class="hdr-link news" href="updates.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span data-t="">새 소식</span><i class="dot" hidden></i></a><a class="hdr-link" href="about.html" aria-current="page"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span data-t="">자료와 한계</span></a></div>
+  <div class="updated"><span data-t="hdr.updated">갱신</span> <b data-fill="generated"></b></div>
+  <div class="lang-switch" role="group" aria-label="언어" data-t-aria-label=""><a href="?lang=ko" data-lang="ko" lang="ko">한국어</a><a href="?lang=en" data-lang="en" lang="en">English</a></div>
+</header>
+
+<main class="wrap">
+  <article class="card prose">
+    <h1 data-t="">자료와 한계</h1>
+    <p class="lead" data-t="abt.lead">국내외 고병원성 조류인플루엔자(HPAI) 현황을 정리했습니다. 한국외국어대학교 이동현 교수 연구실(Donghyun Lee AI Group)이 운영합니다.</p>
+
+    <h2 data-t="">자료 출처</h2>
+    <div class="xscroll"><table class="tbl">
+      <thead><tr><th data-t="">자료</th><th data-t="">범위</th><th data-t="">갱신</th><th data-t="">비고</th></tr></thead>
+      <tbody>
+        <tr>
+          <td data-t="abt.src.wadis.name">국립야생동물질병관리원 야생동물 질병관리 시스템(WADIS) 공간정보 서비스</td>
+          <td data-t="abt.src.wadis.scope">야생조류 AI 검사 기록(채취 건 단위, 음성 포함), 21–22 시즌부터</td>
+          <td data-t="abt.src.wadis.upd">매일(조회 <span data-fill="wadisDate"></span>)</td>
+          <td data-t="abt.src.wadis.note">–</td>
+        </tr>
+        <tr>
+          <td data-t="abt.src.mafra.name">농림축산식품부 가축질병 발생현황 지도 서비스</td>
+          <td data-t="abt.src.mafra.scope">가금 농장 HPAI 발생(KAHIS 정보공개 기준, 예방적 살처분 중 양성 농장 포함), 2023년 1월부터</td>
+          <td data-t="abt.src.mafra.upd">매일(조회 <span data-fill="mafraDate"></span>)</td>
+          <td data-t="abt.src.mafra.note">–</td>
+        </tr>
+        <tr>
+          <td>WOAH WAHIS</td>
+          <td data-t="abt.src.woah.scope">각국의 HPAI 발생 보고, 2021년 7월부터</td>
+          <td data-t="abt.src.woah.upd">새 자료가 나올 때(현재 <span data-fill="extraction"></span>)</td>
+          <td data-t="abt.src.woah.note">표 아래 출처 문구는 WOAH가 정한 그대로입니다.</td>
+        </tr>
+        <tr>
+          <td data-t="abt.src.meteo.name">Open-Meteo 일 최저기온(ERA5 재분석과 예보)</td>
+          <td data-t="abt.src.meteo.scope">철새 출발지 12곳(극동러시아·동시베리아·몽골·중국 동북부), 2020년 8월부터 앞으로 7일까지. 영하선은 동아시아 2.5° 격자 336곳(북위 30–67.5°, 동경 102.5–152.5°), 8월 1일부터 앞으로 7일까지. 시군 기온은 시군 229곳의 대표점에서 이번 시즌과 지난 시즌(8월~3월)</td>
+          <td data-t="">매일</td>
+          <td data-t="abt.src.meteo.note">CC BY 4.0. 첫 검출 시기 계산, 세계 발생 지도의 영하선, 국내 현황의 밤 영하 지역과 시군 기온 그래프에 씁니다. 영하선은 해발 2,000 m가 넘는 격자점을 뺍니다.</td>
+        </tr>
+        <tr>
+          <td data-t="abt.src.era5l.name">코페르니쿠스 기후변화서비스 ERA5-Land 시간별 시계열(DOI 10.24381/ee82e357)</td>
+          <td data-t="abt.src.era5l.scope">시군 229곳 대표점, 1991–2020년 8월~3월(30시즌)</td>
+          <td data-t="abt.src.era5l.upd">고정(1991–2020 평년)</td>
+          <td data-t="abt.src.era5l.note">CC BY 4.0. 시군 기온 그래프의 평년(같은 날 앞뒤 7일의 평균과 10–90% 범위)에 씁니다. 화면 기온(Open-Meteo)에 맞추려고 지난 시즌 두 자료의 날마다 차이를 계절에 따라 매끄럽게 맞춰 시군마다 더했습니다. 올해 8–9월 무작위 48곳으로 시험하면 7일 평균의 어긋남이 가운데 0.4°C, 90%가 0.9°C 안이어서 1°C 안쪽 차이는 '평년과 비슷'으로 씁니다. 시군 안에 육지 격자가 없는 해안·섬 7곳(인천 남동구·동구·연수구·옹진군·중구, 전남 신안군·완도군)은 ERA5 시간별 시계열(0.25°, DOI 10.24381/1cf1ad76, CC BY 4.0)을 씁니다. 코페르니쿠스 표기: Contains modified Copernicus Climate Change Service information 2026. Neither the European Commission nor ECMWF is responsible for any use that may be made of the Copernicus information or data it contains.</td>
+        </tr>
+        <tr>
+          <td data-t="abt.src.admin.name">통계청 통계지리정보서비스(SGIS) 행정동 경계, vuski/admdongkor 가공본</td>
+          <td data-t="abt.src.admin.scope">시도·시군구 경계(2026년 7월 1일 기준), 국내 현황 지도의 기본 바탕</td>
+          <td data-t="">경계가 바뀔 때</td>
+          <td data-t="abt.src.admin.note">본 데이터는 통계청 통계지리정보서비스(SGIS, https://sgis.kostat.go.kr)에서 공공누리 제1유형으로 개방한 행정동 경계를 가공한 것이며(가공: vuski/admdongkor, https://github.com/vuski/admdongkor), CC BY 4.0으로 배포됩니다. 여기서는 시도·시군구 경계선으로 묶고 단순화했습니다.</td>
+        </tr>
+        <tr>
+          <td data-t="abt.src.birds.name">농림축산검역본부 철새 이동 정보(공공데이터포털)</td>
+          <td data-t="abt.src.birds.scope">위치추적기를 단 철새의 북상 전·후 위치, 2021~2026년 봄 198건</td>
+          <td data-t="abt.src.birds.upd">해마다</td>
+          <td data-t="abt.src.birds.note">원자료에 지명만 있어 OpenStreetMap Nominatim(© OpenStreetMap 기여자, ODbL)으로 대략적인 위치를 찾았습니다.</td>
+        </tr>
+        <tr>
+          <td data-t="abt.src.nibr.name">국립생물자원관 겨울철새 서식 현황 조사(기후에너지환경부·옛 환경부 보도자료)</td>
+          <td data-t="abt.src.nibr.scope">10~3월 달마다 센 겨울철새 수의 전국 합계</td>
+          <td data-t="">조사 결과가 발표될 때</td>
+          <td data-t="abt.src.nibr.note">보도자료 숫자를 그대로 옮깁니다.</td>
+        </tr>
+        <tr>
+          <td data-t="abt.src.safemap.name">행정안전부 생활안전지도 철새도래지(원자료 국립생물자원관 겨울철 조류 조사)</td>
+          <td data-t="abt.src.safemap.scope">도래지 231곳의 좌표와 달별 겨울철새 수, 21–22 시즌부터</td>
+          <td data-t="abt.src.safemap.upd">매일 확인</td>
+          <td data-t="abt.src.safemap.note">숫자는 받은 그대로 씁니다.</td>
+        </tr>
+        <tr>
+          <td data-t="abt.src.lc.name">ESA WorldCover 2021 v200(Zanaga 외 2022, doi:10.5281/zenodo.7254221)</td>
+          <td data-t="abt.src.lc.scope">국내 현황 지도의 '물·습지'·'농경지' 층</td>
+          <td data-t="abt.src.lc.upd">고정(2021년 자료)</td>
+          <td data-t="abt.src.lc.note">CC BY 4.0. 물·습지·농경지만 골라 단순화했습니다. 갯벌은 원자료에서 바다와 같은 등급이라 빠져 있습니다.</td>
+        </tr>
+        <tr>
+          <td data-t="abt.src.map.name">OpenStreetMap, Sentinel-2 cloudless(EOX)</td>
+          <td data-t="">배경지도, 위성 사진</td>
+          <td>–</td>
+          <td data-t="abt.src.map.note">© OpenStreetMap 기여자. 위성은 Sentinel-2 cloudless 2023 by EOX IT Services GmbH(Contains modified Copernicus Sentinel data 2023), CC BY-NC-SA 4.0.</td>
+        </tr>
+      </tbody>
+    </table></div>
+    <p class="caption" id="woah-caption"></p>
+
+    <h2 data-t="">세는 방법</h2>
+    <ul>
+      <li data-t="abt.cnt.season"><b>시즌</b>은 7월 1일부터 다음 해 6월 30일까지입니다.</li>
+      <li data-t="abt.cnt.wild"><b>야생조류 판정</b>은 WADIS의 병원성 결과를 따릅니다. 고병원성(HPAI), H5·H7 저병원성(LPAI), 유전자는 나왔지만 바이러스가 분리되지 않은 경우, 유전자가 나왔지만 병원성 판정이 음성인 경우, 음성, 판정 불가로 나눕니다. 저병원성으로 실렸어도 아형이 H5·H7이 아니면(25–26 시즌 H3N8·H12N5 2건) LPAI(H5·H7)로 세지 않고 따로 둡니다. 날짜는 채취일입니다.</li>
+      <li data-t="abt.cnt.override"><b>정부 발표 반영</b>: 정부가 발표했지만 WADIS 공개 기록에 아직 반영되지 않은 판정은, 발표 자료의 채취일·좌표가 WADIS 기록과 같을 때만 그 기록의 판정을 먼저 바로잡고 지도와 목록에 '정부 발표 반영'으로 표시합니다. WADIS가 같은 판정으로 고치면 표시가 빠집니다.</li>
+            <li data-t="abt.cnt.poultry"><b>가금 농장 발생</b>은 농식품부 목록의 한 줄을 1건으로 세고, 날짜는 발생일입니다.</li>
+      <li data-t="abt.cnt.groups"><b>조류 종 무리</b>는 WADIS의 종 이름(국내)과 WAHIS의 학명(세계)을 화면의 무리(오리·기러기·고니, 두루미 등)로 묶은 것입니다. 종을 적지 않은 시료(국내는 주로 분변)는 '종 미상'이고, 세계 자료의 포유류는 따로 셉니다.</li>
+      <li data-t="abt.cnt.rate"><b>검사 대비 검출률</b>은 AI 유전자가 나온 기록을 공개 검사 기록(판정 불가 제외)으로 나눈 값입니다. 달별로는 검사가 5건 이상인 달만 보여 줍니다. 골라서 검사한 기록이 섞여 있어 유병률이 아닙니다.</li>
+      
+      <li data-t="abt.cnt.cum"><b>시즌 누적</b> 그래프는 7월 1일부터 쌓은 건수를 시즌마다 선 하나로 겹쳐 그립니다. 고른 시즌(전체 시즌이면 이번 시즌)만 색으로 칠하고 나머지는 회색 선입니다. 지난 시즌을 고르면 아직 끝나지 않은 이번 시즌은 빼고 견줍니다. 윤년 시즌의 2월 29일은 3월 1일에 합쳐 그립니다.</li>
+      <li data-t="abt.cnt.hotspot"><b>상습 검출지</b>는 지난 다섯 시즌 가운데 세 시즌 이상 야생조류 HPAI가 나온 시군구입니다. 지도의 원은 그 시군구 검출 지점들의 가운데에 그립니다.</li>
+      <li data-t="abt.cnt.world"><b>세계 발생 보고</b>는 WAHIS 발생 번호(Outbreak_id) 하나를 1건으로 셉니다. 30곳 이상을 묶은 보고도 1건입니다. 최근 12개월은 지점으로, 그보다 앞선 기간은 나라별·달별 합계로 보여 줍니다. 발생부터 보고까지 보통 2~3주가 걸려, '최근 N일 새 보고'는 처음 보고된 날로, 시즌은 발생 시작일로 셉니다. 지점과 '최근 새 보고' 줄의 링크는 그 발생을 처음 보고한 WAHIS 보고서로 갑니다.</li>
+    </ul>
+
+    <h2 data-t="">예측 방법</h2>
+    <ul>
+      <li data-t="abt.fc.base"><b>기본 예측</b>은 연구실의 자체 예측 모형으로 야생조류 HPAI 전국 건수를 시즌 끝까지 내다본 값입니다. WADIS 공개 기록(21–22 시즌부터)과 출발지 기온만 쓰고, 새 기록이 들어오면 매일 다시 계산합니다. 이번 시즌 첫 영하일이 아직 관측되지 않은 출발지는 예보나 지난 시즌 날짜의 범위에서 여러 번 뽑아 예측에 넣습니다. 관측과 예보(앞으로 7일)에 영하가 없는 곳은 지난 시즌 평균 날짜를 쓰되 예보 끝보다 이르게 두지 않습니다. 더 먼 날 예보는 하루 사이에도 크게 바뀌어 쓰지 않습니다. 날마다 낸 예측은 고치지 않고 '예측 기록'에 남기고, 계산 방법을 고친 날을 함께 적습니다.</li>
+      <li data-t="abt.fc.cats"><b>적음·비슷·많음 확률</b>은 이번 시즌 합계가 지난 시즌 합계(21–22 시즌부터)와 견줘 적음·비슷·많음 가운데 어디에 들지를 확률로 보인 것입니다. 칸 경계는 지난 시즌 합계의 가운데 값보다 40% 적은 값과 40% 많은 값이고, 시즌이 시작하기 전 7월에 정해 시즌 내내 바꾸지 않습니다. 평소 확률은 지난 시즌이 세 칸에 든 비율입니다. 확률은 5% 단위로 반올림합니다. 시즌이 끝나면 실제 합계가 든 칸으로 날마다 낸 확률을 채점하고(순위 확률 점수) 평소 확률과 견줍니다.</li>
+      
+      
+      
+      
+      <li data-t="abt.fc.backtest"><b>지난 시즌에 얼마나 맞았나</b>는 지난 시즌마다 그 시즌 기록은 10월 말·11월 말·12월 말·1월 말·2월 말까지만 쓰고(다른 시즌은 모두 씀) 시즌 합계를 예측해 본 결과입니다. 확률이 가장 큰 칸이 실제 칸과 같았던 시즌 수와 실제 칸에 준 확률의 평균을 평소 확률과 견줍니다.</li>
+      
+      
+      <li data-t="abt.fc.onset"><b>첫 검출 시기</b>는 2026년 9월 인수공통감염병학회 발표에서 쓴 방법을 공개 자료에 적용해 매일 다시 계산합니다. 철새 출발지 12곳에서 8월 1일 이후 하루 최저기온이 처음 0℃ 아래로 내려간 날을 평균합니다. 여기에 지난 시즌 국내 첫 검출(채취일)까지의 간격 가운데 가장 짧은 값과 가장 긴 값을 빼고 남은 범위를 더해 예상 창을 만듭니다. 아직 영하가 오지 않은 곳은 앞으로 7일 예보로, 예보에도 없으면 그곳의 평년값으로 채웁니다.</li>
+      <li data-t="abt.fc.ratio"><b>LPAI/HPAI 비율</b>은 야생조류에서 나온 H5·H7 저병원성 건수를 고병원성 건수로 나눈 값입니다.</li>
+    </ul>
+
+    
+
+    <h2 data-t="">한계</h2>
+    <ul>
+      <li data-t="abt.lim.volume">WADIS 공개 기록은 채취 건 단위이고 한 건에 시료를 몇 개 채취했는지는 공개되지 않습니다. 검출이 없는 곳을 바이러스가 없는 곳이라고 말할 수 없고, 지역 사이의 차이에도 검사량 차이가 섞여 있습니다.</li>
+      <li data-t="abt.lim.delay">확진과 공개까지 며칠 걸리고, WADIS 공개 기록은 보통 1~2주 늦게 올라옵니다. 그래서 야생조류의 지난 시즌 비교는 공개 기록의 마지막 채취일에 맞추고, 최근 1~2주 숫자는 늘 수 있습니다.</li>
+      <li data-t="abt.lim.missing0">WADIS 공개 기록에는 농식품부·지자체 검사가 대부분 빠져 있습니다. 기록이 적다고 실제로 검사를 하지 않았다는 뜻은 아닙니다.</li>
+      <li data-t="abt.lim.years">WADIS 공개 기록은 20–21 시즌 이전에 빠진 것이 많아 21–22 시즌부터 씁니다. 가금 농장 목록은 2023년 1월부터라 가금 비교는 23–24 시즌부터 합니다.</li>
+      <li data-t="abt.lim.farmxy">가금 농장 좌표는 읍면동 관공서 위치입니다. 가금 농장까지의 거리는 수 km 어긋날 수 있습니다.</li>
+      <li data-t="abt.lim.admin">행정구역 바탕은 2026년 7월 1일 경계라 광주와 전남이 한 시도로 그려지지만, 시도 필터는 지난 시즌과 견주려고 둘을 나눠 둡니다.</li>
+      <li data-t="abt.lim.model">자체 예측 모형은 다섯 시즌 기록으로 배워 불확실성이 크고, 기온 효과는 22–23(일찍 식고 많음)과 23–24(늦게 식고 적음) 두 시즌에 크게 기댑니다. 지난 시즌 맞춰 보기도 같은 다섯 시즌의, 다 들어온 기록으로 했기 때문에 실제 성능은 표보다 조금 낮을 수 있습니다.</li>
+      
+      
+      <li data-t="abt.lim.wahis">나라마다 감시 방식과 보고 범위가 달라 WAHIS 보고 수의 차이가 곧 위험의 차이는 아닙니다.</li>
+      <li data-t="abt.lim.birds">철새 이동은 위치추적기를 단 일부 철새의 기록이라 모든 철새의 이동을 대표하지 않고, 위치는 지명으로 찾은 대략적인 위치입니다. 월별 겨울철새 수는 조사 지점 수가 달마다 달라 시즌 사이 비교가 대략적입니다.</li>
+    </ul>
+
+    <h2 data-t="">인용</h2>
+    <p data-t="abt.cite">한국외국어대학교 이동현 교수 연구실(Donghyun Lee AI Group). 조류인플루엔자 대시보드. https://hpai.kr. 갱신일 <span data-fill="generated"></span> 원자료를 인용할 때는 위 출처를 함께 적어 주세요. 지도를 크게 보기에서 PNG로 저장하면 그림 아래에 연구실·대시보드 이름(hpai.kr)과 원자료·바탕지도 출처가 함께 들어갑니다. 지금 보는 화면은 국내 현황·세계 발생 필터 줄의 '이 화면 링크 복사'로 주소째 보낼 수 있습니다(시즌·시도·지도 층·시간 막대 위치, 기간·대륙 등이 담깁니다).</p>
+
+    <h2 data-t="">자동 수집과 AI 이용</h2>
+    <p data-t="abt.bots">프로그램으로 이 사이트를 긁어 가거나 AI 학습·검색·요약 답변에 쓰지 마세요. 사람 대신 사이트를 읽는 AI 에이전트도 마찬가지입니다. 자세한 안내는 <a href="robots.txt">robots.txt</a>와 <a href="ai.txt">ai.txt</a>에 있습니다. 화면의 숫자와 그림은 출처를 밝혀 인용할 수 있습니다.</p>
+
+    <h2 data-t="">운영</h2>
+    <p data-t="abt.ops">운영: 한국외국어대학교 이동현 교수 연구실(<a href="https://donghyunlee-lab.github.io">Donghyun Lee AI Group</a>). 개발: 한국인공지능㈜. 이 사이트의 숫자는 공개 자료를 정리한 것이며 정부의 공식 발표를 대신하지 않습니다.</p>
+    <p data-t="abt.fonts">글꼴은 Pretendard(SIL Open Font License), 아이콘은 Lucide(ISC License)를 씁니다.</p>
+    <p data-t="abt.ga">방문 통계를 보려고 Google 애널리틱스를 씁니다. 방문 수·본 쪽·대략의 지역 같은 정보가 모이며, 이름이나 연락처는 모으지 않습니다.</p>
+  </article>
+</main>
+
+<footer class="foot">
+  <nav class="foot-nav" aria-label="모든 쪽" data-t-aria-label=""><a href="index.html" data-t="">국내 현황</a> · <a href="world.html" data-t="">세계 발생</a> · <a href="updates.html" data-t="">새 소식</a> · <a href="about.html" data-t="">자료와 한계</a></nav>
+  <div data-t="ftr.ops"><b>운영</b> 한국외국어대학교 이동현 교수 연구실(<a href="https://donghyunlee-lab.github.io">Donghyun Lee AI Group</a>) · <b>개발</b> 한국인공지능㈜</div>
+  <div class="copy" data-t="ftr.copy">© 2026 Donghyun Lee AI Group · 한국인공지능㈜. 화면 코드의 무단 복제·재사용을 금합니다. 숫자와 그림은 출처를 밝혀 인용할 수 있고, 원자료의 권리는 각 출처에 있습니다.</div>
+</footer>
+
+<script src="data/meta.js?v=202610241850"></script>
+<script src="data/updates.js?v=202610241850"></script>
+<script src="assets/i18n.js?v=202610241850"></script>
+<script src="assets/common.js?v=202610241850"></script>
+<script src="assets/about.js?v=202610241850"></script>
+<script>
+  /* Fill after i18n.js has rewritten translated cells on DOMContentLoaded (English rebuilds the data-fill spans). Kept in English so ?i18n=check does not flag it. */
+  document.addEventListener("DOMContentLoaded", function () {
+    /* data/meta.js: dates and the WOAH caption only (the full domestic/world data are 1.2 MB) */
+    var M = window.HPAI_META;
+    HP.fillDates({
+      generated: HP.ymd(new Date(HP.epochOf(M.generated))),
+      wadisDate: M.wadis, mafraDate: M.mafra,
+      extraction: HP.ymd(new Date(HP.epochOf(M.wahis.extraction))),
+    });
+    document.getElementById("woah-caption").textContent = M.wahis.caption;
+  });
+</script>
+</body>
+</html>
