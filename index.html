@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="ko" data-theme="navy">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 사이트 아이콘(2026-10-24, 네이버·구글 검색 결과와 브라우저 탭에 뜨는 로고, pipeline/make_icons.py). ICO에 32x32를 적어야 크롬이 SVG를 고른다 -->
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+  <meta name="theme-color" content="#13294b">
+  <meta name="robots" content="noarchive, noai, noimageai">
+  <!-- 네이버 서치어드바이저 소유 확인(2026-10-20, 교수님 네이버 계정) -->
+  <meta name="naver-site-verification" content="f0421c084637c6bbd9b41970a5aee5906eb07467">
+  <meta name="tdm-reservation" content="1">
+  <title data-t="">조류인플루엔자 대시보드: 고병원성 AI 국내·세계 발생 현황</title>
+  <meta name="description" content="고병원성 조류인플루엔자 국내·세계 발생 현황과 이번 시즌 전망" data-t-content="">
+  <!-- 검색·공유(2026-10-20): 주소 하나로 모으고, 카카오톡·네이버 등에 붙일 때 제목·설명·그림 카드가 뜨게 -->
+  <link rel="canonical" href="https://hpai.kr/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="조류인플루엔자 대시보드">
+  <meta property="og:title" content="조류인플루엔자 대시보드: 고병원성 AI 국내·세계 발생 현황">
+  <meta property="og:description" content="고병원성 조류인플루엔자 국내·세계 발생 현황과 이번 시즌 전망">
+  <meta property="og:url" content="https://hpai.kr/">
+  <meta property="og:image" content="https://hpai.kr/og.jpg?v=20261101">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="ko_KR">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="alternate" type="application/rss+xml" title="조류인플루엔자 대시보드 새 소식" href="https://hpai.kr/rss.xml">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="assets/style.css?v=202611142133">
+  <script>try{var hpL=new URLSearchParams(location.search).get("lang")||localStorage.getItem("hpLang");if(hpL==="en"){document.documentElement.classList.add("i18n-wait");setTimeout(function(){document.documentElement.classList.remove("i18n-wait")},3000)}}catch(e){}</script>
+  <script>
+    /* 조회 집계(GA4)는 공개 주소 hpai.kr에서만 보낸다 */
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    if (location.hostname === "hpai.kr") {
+      gtag('js', new Date());
+      gtag('config', 'G-8BS2GGN1SZ');
+      document.head.appendChild(Object.assign(document.createElement("script"), { async: true, src: "https://www.googletagmanager.com/gtag/js?id=G-8BS2GGN1SZ" }));
+    }
+  </script>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="mark" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24"><path d="M16 7h.01"/><path d="M3.4 18H12a8 8 0 0 0 8-8V7a4 4 0 0 0-7.28-2.3L2 20"/><path d="m20 7 2 .5-2 .5"/><path d="M10 18v3"/><path d="M14 17.75V21"/><path d="M7 18a6 6 0 0 0 3.84-10.61"/></svg></span><a class="group" href="https://donghyunlee-lab.github.io">Donghyun Lee <svg class="group-mark" viewBox="-2.5 -730 3872.3 970" width="3.803em" height="0.953em" role="img" aria-label="AI Group"><path d="M3869.8 -250Q3869.8 -197.4 3850.4 -149.4Q3831.6 -102.8 3797.2 -66.8Q3762.7 -30.6 3717.8 -10.7Q3671 10 3619.8 10Q3568.7 10 3521.9 -10.7Q3479.2 -29.6 3445.8 -63.3V230H3369.8V-500H3445.8V-436.7Q3479.2 -470.4 3521.9 -489.3Q3568.7 -510 3619.8 -510Q3671 -510 3717.8 -489.3Q3762.7 -469.4 3797.2 -433.2Q3831.6 -397.2 3850.4 -350.6Q3869.8 -302.6 3869.8 -250ZM2667.4 -250Q2667.4 -197.4 2648 -149.4Q2629.2 -102.8 2594.8 -66.8Q2560.3 -30.6 2515.4 -10.7Q2468.6 10 2417.4 10Q2366.3 10 2319.5 -10.7Q2274.6 -30.6 2240.1 -66.8Q2205.7 -102.8 2186.9 -149.4Q2167.4 -197.4 2167.4 -250Q2167.4 -302.6 2186.9 -350.6Q2205.7 -397.2 2240.1 -433.2Q2274.6 -469.4 2319.5 -489.3Q2366.3 -510 2417.4 -510Q2468.6 -510 2515.4 -489.3Q2560.3 -469.4 2594.8 -433.2Q2629.2 -397.2 2648 -350.6Q2667.4 -302.6 2667.4 -250ZM1559.6 -554.3Q1525.7 -592.7 1481.1 -616.6Q1437.9 -639.8 1389.4 -647Q1340.9 -654.2 1293 -644.4Q1243.7 -634.3 1200.6 -607.4Q1157.4 -580.5 1126.2 -540.2Q1095.7 -501 1079.9 -453.4Q1064 -405.8 1064.7 -355.7Q1065.5 -304.2 1083.7 -255.9Q1101.9 -207.6 1135.1 -168.9Q1167.4 -131.3 1210.2 -106.8Q1253 -82.4 1301.2 -74Q1350.7 -65.5 1400.4 -74.8Q1450.1 -84.2 1493.3 -110.3Q1535.4 -135.8 1566.9 -174.3Q1598.4 -212.9 1615.3 -259.9Q1626.3 -290.2 1630.3 -322H1464.7V-398H1708.7V-360Q1708.7 -294.9 1686.8 -234.1Q1665.4 -174.9 1625.7 -126.2Q1586 -77.5 1532.6 -45.3Q1477.6 -12.1 1414.5 -0.2Q1351.3 11.8 1288.2 0.8Q1226.9 -9.8 1172.6 -40.8Q1118.3 -71.8 1077.4 -119.4Q1035.5 -168.2 1012.6 -229.1Q989.7 -289.8 988.7 -354.6Q987.8 -417.6 1007.8 -477.4Q1027.7 -537.3 1066.1 -586.8Q1105.7 -637.8 1160.4 -671.9Q1215.1 -706.1 1277.8 -718.9Q1338.8 -731.3 1400.5 -722.2Q1462.2 -713.1 1517.1 -683.5Q1573.6 -653.2 1616.5 -604.6ZM3793.8 -250Q3793.8 -287.8 3779.9 -322.2Q3766.6 -355.3 3742.3 -380.7Q3718.1 -406 3687 -419.8Q3654.9 -434 3619.8 -434Q3584.7 -434 3552.7 -419.8Q3521.6 -406 3497.4 -380.7Q3473.1 -355.3 3459.7 -322.2Q3445.8 -287.8 3445.8 -250Q3445.8 -212.2 3459.7 -177.8Q3473.1 -144.7 3497.4 -119.3Q3521.6 -94 3552.7 -80.2Q3584.7 -66 3619.8 -66Q3654.9 -66 3687 -80.2Q3718.1 -94 3742.3 -119.3Q3766.6 -144.7 3779.9 -177.8Q3793.8 -212.2 3793.8 -250ZM2591.4 -250Q2591.4 -287.8 2577.5 -322.2Q2564.2 -355.3 2539.9 -380.7Q2515.7 -406 2484.6 -419.8Q2452.5 -434 2417.4 -434Q2382.3 -434 2350.3 -419.8Q2319.2 -406 2295 -380.7Q2270.7 -355.3 2257.3 -322.2Q2243.4 -287.8 2243.4 -250Q2243.4 -212.2 2257.3 -177.8Q2270.7 -144.7 2295 -119.3Q2319.2 -94 2350.3 -80.2Q2382.3 -66 2417.4 -66Q2452.5 -66 2484.6 -80.2Q2515.7 -94 2539.9 -119.3Q2564.2 -144.7 2577.5 -177.8Q2591.4 -212.2 2591.4 -250ZM78.5 0H-2.5L265.9 -727.5L534.2 0H453.2L265.9 -507.9ZM2835.8 -500V-250Q2835.8 -212.2 2849.7 -177.8Q2863.1 -144.7 2887.4 -119.3Q2911.6 -94 2942.7 -80.2Q2974.7 -66 3009.8 -66Q3044.9 -66 3077 -80.2Q3108.1 -94 3132.3 -119.3Q3156.6 -144.7 3169.9 -177.8Q3183.8 -212.2 3183.8 -250V-500H3259.8V0H3183.8V-63.3Q3150.5 -29.6 3107.8 -10.7Q3061 10 3009.8 10Q2958.7 10 2911.9 -10.7Q2867 -30.6 2832.5 -66.8Q2798.1 -102.8 2779.3 -149.4Q2759.8 -197.4 2759.8 -250V-500ZM1801.1 0V-250V-500H1877.1V-442.3Q1885.8 -451 1895.3 -458.9Q1940.9 -496.6 1996.9 -506.7Q2053.4 -516.8 2107.6 -496.8L2081.3 -425.5Q2046.4 -438.4 2010.4 -431.9Q1974 -425.3 1943.7 -400.3Q1912.7 -374.6 1895.1 -335.3Q1877.1 -295.2 1877.1 -250V0ZM612.7 0V-720H688.7V0Z" fill="currentColor"/></svg></a><a href="index.html" data-t="">조류인플루엔자 대시보드</a></div>
+  <nav aria-label="쪽 이동" data-t-aria-label="">
+    <a href="index.html" aria-current="page"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></svg><span data-t="">국내 현황</span></a>
+    <a href="world.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg><span data-t="">세계 발생</span></a>
+  </nav>
+  <div class="hdr-links"><a class="hdr-link news" href="updates.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span data-t="">새 소식</span><i class="dot" hidden></i></a><a class="hdr-link" href="about.html"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><span data-t="">자료와 한계</span></a></div>
+  <div class="updated"><span data-t="hdr.updated">갱신</span> <b data-fill="generated"></b></div>
+  <div class="lang-switch" role="group" aria-label="언어" data-t-aria-label=""><a href="?lang=ko" data-lang="ko" lang="ko">한국어</a><a href="?lang=en" data-lang="en" lang="en">English</a></div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <div class="notice" id="notice" role="status" hidden></div>
+    <section class="filters" id="filters" aria-label="필터" data-t-aria-label="">
+      <label><span data-t="">시즌</span> <select id="f-season"></select></label>
+      <label><span data-t="">시도</span> <select id="f-sido"></select></label>
+      <label><span data-t="">구분</span> <select id="f-kind"></select></label>
+      <label><span data-t="">조류 종</span> <select id="f-species"></select></label>
+      <button type="button" class="chip" id="copy-link" data-t="" title="시즌·시도·필터·지도 층·바탕·시간 막대 위치를 담은 주소를 복사합니다" data-t-title="">이 화면 링크 복사</button>
+      <span class="hint" data-t="">필터는 숫자·지도·차트에 걸리고, 예측은 늘 전국·이번 시즌입니다. 조류 종은 야생조류에만 걸립니다.</span>
+    </section>
+    <p class="note lag-note" id="lag-note"></p>
+  </div>
+  <section class="kpis kpis-4" id="kpis" aria-label="주요 숫자" data-t-aria-label=""></section>
+  <nav class="quick" aria-label="바로 가기" data-t-aria-label="">
+    <a class="q-ch" href="#ch-obs"><span class="q-n" aria-hidden="true">1</span><span data-t="">관측</span></a><a href="#card-map" data-t="">지도</a><a href="#card-timeline" data-t="">전체 흐름</a><a href="#card-notices" data-t="">공식 알림</a><a href="#card-species" data-t="">조류 종</a>
+    <a class="q-ch est" href="#ch-fc"><span class="q-n" aria-hidden="true">2</span><span data-t="">예측</span></a><a href="#card-scen" data-t="">시즌 합계</a><a href="#card-first" data-t="">9월 첫 예보</a><a href="#card-record" data-t="">예측 기록</a><a href="#forecast" data-t="">이번 시즌 전망</a>
+    <a class="q-ch" href="#ch-ctx"><span class="q-n" aria-hidden="true">3</span><span data-t="">맥락</span></a><a href="#card-compare" data-t="">시즌 비교</a><a href="#card-birds" data-t="">겨울철새</a><a href="#card-temp" data-t="">시군 기온</a>
+    
+  </nav>
+
+  <header class="ch" id="ch-obs"><span class="ch-n" aria-hidden="true">1</span><h2 class="ch-h" data-t="">관측</h2><p class="ch-sub" data-t="">검출·검사와 공식 알림</p></header>
+  <section class="grid g-map">
+    <article class="card" id="card-map">
+      <h2><span data-t="">발생 지도</span> <span class="h-side"><span class="badge" id="map-badge"></span><span class="seg proj-seg" id="proj-seg" role="group" aria-label="지도 보기" data-t-aria-label=""><button type="button" data-v="flat" aria-pressed="true" data-t="">평면</button><button type="button" data-v="globe" aria-pressed="false" data-t="">지구본</button></span></span></h2>
+      <div class="layers" id="layers">
+        <div class="lg"><span class="lg-h" data-t="">고른 시즌</span>
+        <label><input type="checkbox" data-layer="wild" checked><span class="key wild"></span><span data-t="" id="lyr-wild">야생조류 HPAI</span></label>
+        <label><input type="checkbox" data-layer="farm" checked><span class="key farm"></span><span data-t="">가금 농장 HPAI</span></label>
+        <label><input type="checkbox" data-layer="mammal" checked><span class="key mammal"></span><span data-t="">포유류 HPAI</span></label>
+        <label><input type="checkbox" data-layer="lpai"><span class="key lpai"></span><span data-t="" id="lyr-lpai">야생조류 LPAI(H5·H7)</span></label>
+        <label><input type="checkbox" data-layer="pend" checked><span class="key pend"></span><span data-t="">검사 중</span><span class="key pend ann"></span><span data-t="">정부 발표(WADIS 반영 전)</span></label>
+        <label><input type="checkbox" data-layer="neg"><span class="key neg"></span><span data-t="">음성·기타 검사 지점</span></label>
+        </div>
+        <div class="lg lg-ref collapsed" id="lg-ref"><span class="lg-h" data-t="">참고</span>
+        <button type="button" class="tbtn lg-toggle" id="lg-ref-toggle" aria-expanded="false" aria-controls="lg-ref"></button>
+        <label><input type="checkbox" data-layer="past"><span class="key past"></span><span data-t="">지난 시즌 HPAI</span></label>
+        
+        
+        <label><input type="checkbox" data-layer="grade"><span class="key grade"></span><span data-t="">이번 시즌 검출 가능성(시군)</span><span class="est-tag" data-t="">추정</span></label>
+        <label><input type="checkbox" data-layer="cold"><span class="key cold"></span><span data-t="">영하 밤 지역</span></label>
+        <label><input type="checkbox" data-layer="site"><span class="key site"></span><span data-t="">철새 도래지(겨울철새 수)</span></label>
+        <label><input type="checkbox" data-layer="lc-water"><span class="key lc-water"></span><span data-t="">물·습지</span></label>
+        <label><input type="checkbox" data-layer="lc-crop"><span class="key lc-crop"></span><span data-t="">농경지</span></label>
+        </div>
+      </div>
+      <div id="map" class="map" role="region" aria-label="발생 지도" data-t-aria-label=""></div>
+      <div id="globe" class="map globe" role="region" aria-label="한국 중심 세계 발생 지구본" data-t-aria-label="" hidden></div>
+      <div class="tbar" id="tbar" hidden>
+        <button type="button" class="tbtn tb-play" id="tb-play" aria-label="재생" data-t-aria-label="">▶</button>
+        <div class="tb-track">
+          <svg id="tb-hist" class="tb-hist" preserveAspectRatio="none" aria-hidden="true"></svg>
+          <input type="range" id="tb-range" min="0" max="0" step="1" value="0" aria-label="주 고르기" data-t-aria-label="">
+        </div>
+        <span class="tb-label" id="tb-label" aria-live="polite"></span>
+      </div>
+      <p class="note" id="tb-note" data-t="idx.tbar.note">막대를 끌거나 ▶를 누르면 주마다 점이 쌓입니다. 점이 나타나는 순서는 채취일(가금 농장은 발생일) 순서일 뿐 전파 경로가 아닙니다.</p>
+      <p class="note" id="globe-note" hidden></p>
+      <p class="note" id="site-note" aria-live="polite"></p>
+      <p class="note" id="lc-note" hidden></p>
+      <p class="note" id="cold-note" aria-live="polite" hidden></p>
+      <p class="note" id="map-lead"></p>
+      <details class="more"><summary data-t="">지도 읽는 법</summary>
+      <p class="note" data-t="idx.map.note">가금 농장 점은 농식품부가 공개한 읍면동 관공서 위치라 실제 농장과 다릅니다.  검출 가능성은 높음(진한 보라)·보통(옅은 보라)으로 칠하고, 계산 방법은 아래 '이번 시즌 전망'에 있습니다.'철새 도래지'를 켜면 국립생물자원관이 겨울철새를 세는 도래지를 갈색 원으로 그리고, 원 넓이는 고른 시즌에 가장 많았던 달의 마릿수에 비례합니다. 바탕은 오른쪽 위에서 행정구역·지도·위성으로 바꿉니다. 왼쪽 위에서는 확대 비율을 숫자로 넣거나(100%는 전국이 꼭 맞는 크기) 크게 보기를 눌러 PNG로 저장합니다. 시간 막대의 진한 테두리는 그 주에 새로 나온 곳이고, 크게 보기에서 GIF로 저장할 수 있습니다.</p>
+      </details>
+    </article>
+    <div class="map-side" id="map-side">
+    <article class="card fc-sum" id="fc-sum">
+      <h2><span><span data-t="">이번 시즌 예측</span> <span class="est-tag" data-t="">추정</span></span> <span class="badge" id="fc-sum-badge"></span></h2>
+      <p class="sub" data-t="">자체 모형의 추정이라 필터를 바꿔도 전국·이번 시즌 값 그대로입니다.</p>
+      <div id="fc-sum-body"></div>
+      <a class="h-link fs-more" href="#ch-fc" data-t="">예측 자세히 보기 →</a>
+    </article>
+    <article class="card detail" id="detail">
+      <h2><span id="detail-title">이번 시즌 검출</span> <span class="badge" id="detail-badge"></span></h2>
+      <div id="detail-body"></div>
+    </article>
+    </div>
+  </section>
+
+  <section class="card" id="card-timeline">
+    <h2><span data-t="">전체 흐름: 주별 검출과 검사</span> <span class="badge" id="tl-badge"></span></h2>
+    <p class="sub" id="tl-sub"></p>
+    <div class="chart" id="timeline"></div>
+    <p class="note" id="tl-note"></p>
+  </section>
+
+  <section class="card" id="card-notices">
+    <h2><span data-t="">공식 알림</span> <span class="badge" id="notices-badge"></span></h2>
+    <p class="sub" data-t="">정부 기관의 보도자료와 동향보고 가운데 조류인플루엔자 관련 글의 제목만 모았습니다. 제목을 누르면 원문이 새 창에서 열립니다. 매일 확인합니다.</p>
+    <ul class="notice-list" id="notice-list"></ul>
+  </section>
+
+  <section class="card" id="card-species">
+    <h2><span data-t="">어떤 새에서 나왔나</span> <span class="badge" id="species-badge"></span></h2>
+    <p class="sub" data-t="">야생조류 HPAI가 나온 새를 무리로 묶었습니다. 무리나 종을 누르면 지도·숫자·차트의 야생조류에 그 새만 남고, 다시 누르면 전체로 돌아갑니다.</p>
+    <div id="species-panel"></div>
+    <p class="note" id="species-note"></p>
+  </section>
+
+  <header class="ch est" id="ch-fc"><span class="ch-n" aria-hidden="true">2</span><h2 class="ch-h" data-t="">예측</h2><span class="est-tag" data-t="">추정</span><p class="ch-sub" data-t="">자체 모형과 규칙으로 낸 추정입니다. 위 필터와 상관없이 늘 전국·이번 시즌 값이고, 관측과 헷갈리지 않게 보라색으로 그립니다.</p></header>
+  <section class="card" id="card-scen">
+    <h2><span data-t="">예측: 야생조류 HPAI(전국)</span> <span class="badge" id="scen-badge"></span></h2>
+    <p class="sub" id="scen-sub"></p>
+    <div class="fc-hero" id="scen-mid" hidden></div>
+    <p class="lead-text" id="scen-text"></p>
+    <p class="note" id="scen-more"></p>
+    <div id="scen-cats"></div>
+    
+    
+    <div style="margin:10px 0 0"><h3 class="h3" data-t="">지난 시즌에 얼마나 맞았나</h3><div id="scen-acc"></div></div>
+  </section>
+
+  
+  <!-- 9월 첫 예보와 실제: 예보는 고치지 않고 이번 시즌 검출과 견준다 -->
+  <section class="card" id="card-first">
+    <h2><span data-t="">9월 첫 예보와 실제</span> <span class="badge" id="first-badge"></span></h2>
+    <p class="sub" id="first-sub"></p>
+    <div class="first-sum" id="first-sum"></div>
+    <h3 class="h3" data-t="">언제: 예보한 시기와 실제 검출</h3>
+    <div class="first-gantt" id="first-gantt"></div>
+    <div class="grid g-first">
+      <div><h3 class="h3" data-t="">어디: 예보 지도와 실제 검출</h3><div class="first-map" id="first-map" role="region" aria-label="9월 예보 지도와 이번 시즌 검출" data-t-aria-label=""></div><div id="leg-first"></div></div>
+      <div><h3 class="h3" data-t="">항목별로 견주기</h3><div class="xscroll" id="first-table"></div></div>
+    </div>
+    <details class="more"><summary data-t="">예보 원문과 견준 방법</summary><div id="first-how"></div></details>
+  </section>
+  
+
+  <section class="card" id="card-record">
+    <h2><span data-t="">예측 기록</span> <span class="badge" id="record-badge"></span></h2>
+    <p class="sub" data-t="">날마다 낸 시즌 합계 예측을 고치지 않고 남깁니다. 시즌이 지나며 실제와 견줘 맞았는지 셉니다.</p>
+    <p class="lead-text" id="record-text"></p>
+    <div id="leg-record-cats"></div>
+    <div class="chart" id="record-cats"></div>
+    
+    <p class="note" id="record-note"></p>
+    <div class="grid g-2" style="margin:10px 0 0">
+      <div><h3 class="h3" data-t="">날마다 바뀐 까닭</h3><div id="record-table"></div></div>
+      <div><h3 class="h3" data-t="">성적표</h3><div id="record-score"></div></div>
+    </div>
+  </section>
+
+  <section class="card" id="forecast">
+    <h2><span data-t="">이번 시즌 전망</span> <span class="badge" data-t="">전국 · 자체 예측 모형</span></h2>
+    
+    <p class="sub" data-t="">첫 검출 시기와 시군별 검출 가능성입니다. 같은 방법이 지난 시즌에 얼마나 맞았는지도 함께 보여 줍니다.</p>
+    <div class="grid g-2" style="margin:0">
+    
+    
+      <div>
+        <h3 class="h3" data-t="">첫 검출 시기: 출발지 기온 기준</h3>
+        <p class="lead-text" id="first-summary"></p>
+        <div id="lead"></div>
+        <h3 class="h3"><span data-t="">출발지 12곳의 첫 영하일</span> <span class="badge" id="sites-badge"></span></h3>
+        <div class="scroll" style="max-height:220px" id="sites"></div>
+        <p class="note"><a href="world.html?layer=freeze" data-t="">세계 발생 지도에서 영하선 보기 →</a></p>
+      </div>
+      
+      <div>
+        <h3 class="h3"><span data-t="">자체 예측 모형: 시군별 검출 가능성</span> <span class="badge" id="grade-badge"></span></h3>
+        <p class="note" id="grade-rule"></p>
+        <div id="grade-list"></div>
+        <h3 class="h3" data-t="">이 모형을 지난 시즌에 썼다면</h3>
+        <div id="grade-backtest"></div>
+      </div>
+      
+    </div>
+  </section>
+
+  
+
+  
+
+  <header class="ch" id="ch-ctx"><span class="ch-n" aria-hidden="true">3</span><h2 class="ch-h" data-t="">맥락</h2><p class="ch-sub" data-t="">지난 시즌과 비교, 겨울철새, 밤 기온</p></header>
+  <section class="card" id="card-compare">
+    <h2><span data-t="">지난 시즌과 비교</span></h2>
+    <div class="controls">
+      <span class="seg" id="cmp-tabs" role="tablist" aria-label="비교 항목" data-t-aria-label=""><button type="button" role="tab" id="tab-cum" aria-controls="pane-cum" aria-selected="true" data-t="">시즌 누적</button><button type="button" role="tab" id="tab-rate" aria-controls="pane-rate" aria-selected="false" tabindex="-1" data-t="">검사 대비 검출률</button><button type="button" role="tab" id="tab-ratio" aria-controls="pane-ratio" aria-selected="false" tabindex="-1" data-t="">LPAI/HPAI 비율</button></span>
+    </div>
+    <div class="grid g-2 pane" role="tabpanel" id="pane-cum" aria-labelledby="tab-cum">
+      <div id="card-cum-wild">
+        <h3 class="h3 hrow"><span data-t="">야생조류 HPAI</span></h3>
+        <p class="sub" id="cum-wild-sub"></p>
+        <p class="lead-text" id="cum-wild-text"></p>
+        <div id="leg-cum-wild"></div>
+        <div class="chart" id="cum-wild"></div>
+      </div>
+      <div id="card-cum-farm">
+        <h3 class="h3 hrow"><span data-t="">가금 농장 HPAI</span></h3>
+        <p class="sub" id="cum-farm-sub"></p>
+        <p class="lead-text" id="cum-farm-text"></p>
+        <div id="leg-cum-farm"></div>
+        <div class="chart" id="cum-farm"></div>
+      </div>
+    </div>
+    <div class="pane" role="tabpanel" id="pane-rate" aria-labelledby="tab-rate" hidden>
+      <div id="card-rate">
+        <h3 class="h3 hrow"><span id="rate-h"></span> <span class="badge" id="rate-badge"></span></h3>
+        <p class="sub" id="rate-sub"></p>
+        <div id="leg-rate"></div>
+        <div class="chart" id="rate"></div>
+      </div>
+      
+    </div>
+    <div class="pane" role="tabpanel" id="pane-ratio" aria-labelledby="tab-ratio" hidden>
+      <div id="card-ratio" class="narrow">
+        <h3 class="h3 hrow"><span data-t="">시즌별 고병원성과 저병원성</span></h3>
+        <p class="sub" data-t="">야생조류에서 나온 저병원성(H5·H7) 건수를 고병원성 건수로 나눈 값(시즌별)</p>
+        <div id="leg-ratio"></div>
+        <div class="chart" id="ratio"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card" id="card-birds">
+    <h2><span data-t="">겨울철새 수와 야생조류 HPAI</span> <span class="badge" id="birds-badge"></span></h2>
+    <p class="sub" data-t="">국립생물자원관이 10월부터 3월까지 달마다 전국 주요 철새 도래지에서 센 겨울철새 수(보도자료의 전국 합계)와, 같은 달 전국 야생조류 HPAI 검출 건수(채취일 기준)입니다.</p>
+    <div id="leg-birds"></div>
+    <div class="grid g-2" style="margin:0" id="birds-charts">
+      <div><h3 class="h3" data-t="">겨울철새 수(만 마리)</h3><div class="chart" id="birds-count"></div></div>
+      <div><h3 class="h3" data-t="">야생조류 HPAI 검출(건)</h3><div class="chart" id="birds-hpai"></div></div>
+    </div>
+    <details class="more"><summary data-t="">조사 기준과 읽는 법</summary><p class="note" id="birds-note"></p></details>
+  </section>
+
+  <!-- 시군 밤 최저기온: 처음에는 접어 두고, 펼칠 때 기온 자료를 불러온다 -->
+  <section class="card fold" id="card-temp">
+    <h2><button type="button" class="fold-h" id="temp-fold" aria-expanded="false" aria-controls="temp-body"><span data-t="">시군 밤 최저기온</span><span class="fold-tg" id="temp-fold-tg" data-t="">펼치기</span></button> <span class="badge" id="temp-badge"></span></h2>
+    <p class="sub" data-t="idx.temp.sub">이번 시즌(8월부터)과 지난 시즌의 밤 최저기온을 평년(1991–2020, 회색)과 겹쳤습니다. 아래 점은 그 시군의 HPAI 검출 날짜입니다.</p>
+    <div class="fold-body" id="temp-body" hidden>
+      <div class="controls" id="temp-controls">
+        <label><span data-t="">시도</span> <select id="temp-sido"></select></label>
+        <label><span data-t="">시군</span> <select id="temp-sgg"></select></label>
+      </div>
+      <div id="leg-temp"></div>
+      <div class="chart" id="temp-chart"></div>
+      <p class="note" id="temp-note" aria-live="polite"></p>
+      <details class="more"><summary data-t="">자료와 평년 계산</summary>
+      <p class="note" data-t="idx.temp.src">지도에서 '영하 밤 지역'을 켜고 시군을 누르면 이 그래프가 그 시군으로 바뀝니다. 기온은 Open-Meteo 일 최저기온입니다(ERA5 재분석, 최근 며칠은 예보 모형). 시군 안의 한 점(대표점) 값이라 넓은 시군은 곳에 따라 다를 수 있습니다. 평년은 코페르니쿠스 ERA5-Land 1991–2020년 30시즌에서 같은 날 앞뒤 7일을 모아 냈습니다. 점선은 평균, 띠는 10–90% 범위입니다. 두 자료는 시군마다 조금씩 달라서 지난 시즌의 날마다 차이를 계절에 따라 매끄럽게 맞춰 평년에 더했습니다(DOI 10.24381/ee82e357, CC BY 4.0, Contains modified Copernicus Climate Change Service information 2026). 평년과 1°C 안쪽으로 다르면 '평년과 비슷'으로 씁니다.</p>
+      </details>
+    </div>
+  </section>
+
+  
+
+  <section>
+    
+    <article class="card notes">
+      <h2 data-t="">읽을 때 주의할 점</h2>
+      <ul>
+        <li data-t="">공개 검사 기록은 채취 건 단위라 검사량을 알 수 없습니다. 검출이 없다고 바이러스가 없다는 뜻은 아닙니다.</li>
+        <li data-t="">야생조류는 채취일, 가금 농장은 발생일 기준입니다. 확진과 공개까지 며칠 걸려 최근 1~2주 숫자는 늘 수 있습니다.</li>
+        
+        <li data-t="">자체 예측 모형은 다섯 시즌 기록으로 배워 불확실성이 큽니다. 확률이 가장 큰 칸 하나만 보지 말고 세 칸을 함께 보세요.</li>
+        
+        <li data-t="">첫 검출 시기는 지난 시즌 기록으로 만든 단순 규칙입니다.</li>
+      </ul>
+      <p class="caption" data-t="idx.notes.caption">자료 출처와 세는 기준은 <a href="about.html">자료와 한계</a>에 있습니다.</p>
+    </article>
+  </section>
+</main>
+
+<footer class="foot">
+  <nav class="foot-nav" aria-label="모든 쪽" data-t-aria-label=""><a href="index.html" data-t="">국내 현황</a> · <a href="world.html" data-t="">세계 발생</a> · <a href="updates.html" data-t="">새 소식</a> · <a href="about.html" data-t="">자료와 한계</a></nav>
+  <div data-t="ftr.ops"><b>운영</b> 한국외국어대학교 이동현 교수 연구실(<a href="https://donghyunlee-lab.github.io">Donghyun Lee AI Group</a>) · <b>개발</b> 한국인공지능㈜</div>
+  <div data-t="idx.ftr.src"><b>출처</b> 국립야생동물질병관리원 야생동물 질병관리 시스템(WADIS, 조회 <span data-fill="wadisDate"></span>) · 국립야생동물질병관리원 야생조류 및 가금류 AI 일일 발생 동향보고(검사 중·가금 발표 반영, <span data-fill="niwdcDate"></span>) · 농림축산식품부 가축질병 발생현황(KAHIS 정보공개 기준, 조회 <span data-fill="mafraDate"></span>) · 기온 Open-Meteo(ERA5·예보, CC BY 4.0) · 평년 기온 Copernicus ERA5-Land(CC BY 4.0) · 겨울철새 수 국립생물자원관 조사(기후에너지환경부 보도자료) · 철새 도래지 행정안전부 생활안전지도(국립생물자원관 겨울철 조류 조사) · 해외 발생 WOAH WAHIS · 행정구역 경계 통계청 SGIS(공공누리 제1유형)·admdongkor(CC BY 4.0) · 배경지도 © OpenStreetMap 기여자 · 위성 Sentinel-2 cloudless(EOX)</div>
+  <div class="copy" data-t="ftr.copy">© 2026 Donghyun Lee AI Group · 한국인공지능㈜. 화면 코드의 무단 복제·재사용을 금합니다. 숫자와 그림은 출처를 밝혀 인용할 수 있고, 원자료의 권리는 각 출처에 있습니다.</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="data/domestic.js?v=202611142133"></script>
+<script src="data/birds.js?v=202611142133"></script>
+<script src="data/notices.js?v=202611142133"></script>
+<script src="assets/korea-admin.js?v=202611142133"></script>
+<script src="data/updates.js?v=202611142133"></script>
+
+<script src="assets/i18n.js?v=202611142133"></script>
+<script src="assets/common.js?v=202611142133"></script>
+<script src="assets/globe.js?v=202611142133"></script>
+<script src="assets/charts.js?v=202611142133"></script>
+<script src="assets/domestic.js?v=202611142133"></script>
+</body>
+</html>
